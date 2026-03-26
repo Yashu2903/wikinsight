@@ -29,10 +29,31 @@ CHECKPOINT_DIR = os.environ.get("STREAM_CHECKPOINT_DIR", "checkpoint_wiki_struct
 TRIGGER_SECONDS = int(os.environ.get("STREAM_TRIGGER_SECONDS", "2"))
 WINDOW_DURATION_SEC = int(os.environ.get("WINDOW_DURATION_SEC", "40"))
 WINDOW_SLIDE_SEC = int(os.environ.get("WINDOW_SLIDE_SEC", "6"))
-MONGO_URI = os.environ.get(
-    "MONGO_URI",
-    "mongodb+srv://wikiStats:wikiStats@cluster0-hm78j.gcp.mongodb.net/daywise_changes?retryWrites=true&w=majority",
-)
+
+
+def _mongo_uri():
+    """Same resolution as backend/flask/app.py: MONGO_URI or split env vars."""
+    explicit = os.getenv("MONGO_URI")
+    if explicit:
+        return explicit
+    user = os.getenv("MONGO_USERNAME") or os.getenv("USERNAME")
+    password = os.getenv("MONGO_PASSWORD") or os.getenv("PASSWORD")
+    host = os.getenv("MONGO_HOST") or os.getenv("HOST")
+    database = os.getenv("MONGO_DATABASE") or os.getenv("DATABASE")
+    return (
+        "mongodb+srv://"
+        + user
+        + ":"
+        + password
+        + "@"
+        + host
+        + "/"
+        + database
+        + "?retryWrites=true&w=majority"
+    )
+
+
+MONGO_URI = _mongo_uri()
 
 # Global line-chart series (same role as legacy driver-side lists)
 additionLineChartData = []
