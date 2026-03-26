@@ -1,4 +1,4 @@
-# WikiStats
+# Wikinsight
 
 Real-time analytics dashboard for [Wikipedia Recent Changes](https://stream.wikimedia.org/v2/stream/recentchange). The stack ingests the public EventSource stream, aggregates metrics in Spark, and serves live charts over Server-Sent Events (SSE) plus historical hourly data from MongoDB.
 
