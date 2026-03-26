@@ -1,0 +1,19 @@
+{
+  "name": "lsp-backend",
+  "version": "1.0.0",
+  "description": "Backend to push Kafka server side events (SSE) to Wikipedia RecentChanges application frontend",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.22.1",
+    "kafka-node": "^5.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Sidharth Bambah",
+  "license": "ISC"
+}
